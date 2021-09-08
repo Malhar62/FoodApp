@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">FoodApp</string>
+    <string name="facebook_app_id">373240087765151</string>
+    <string name="fb_login_protocol_scheme">fb373240087765151</string>
+    <string name="server_client_id">722399197989-jihp9g0rgjsapj0uqushdl4q8ol5fp7v.apps.googleusercontent.com</string>
+</resources>
