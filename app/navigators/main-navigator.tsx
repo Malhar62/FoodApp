@@ -15,7 +15,11 @@ import { typography } from "../theme"
 import { useStores } from "../models"
 import { HEIGHT, WIDTH } from "../theme/scale"
 import Fontisto from 'react-native-vector-icons/Fontisto'
-import { DrawerHeader } from "../components"
+import { DrawerHeader, MyTab } from "../components"
+import { Cart } from "../screens/Shoe/Cart"
+import { Home } from "../screens/Shoe/Home"
+import { Search } from "../screens/Shoe/Search"
+import { Like } from "../screens/Shoe/Like"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -47,6 +51,11 @@ export type PrimaryParamList = {
   main: undefined
   auth: undefined
   profile: undefined
+  extension: undefined
+  homein: undefined
+  searchin: undefined
+  opencartin: undefined
+  likein: undefined
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -74,7 +83,12 @@ function AuthStack() {
 function MainStack() {
   function CustomDrawerContent() {
     let data = [
-      { path: 'home' }, { path: 'category' }, { path: 'search' }, { path: 'tab', name1: 'History', name2: 'Favourite' }, { path: 'profile' }
+      { path: 'home' },
+      { path: 'category' },
+      { path: 'search' },
+      { path: 'tab', name1: 'History', name2: 'Favourite' },
+      { path: 'profile' },
+      { path: 'extension' }
     ]
     const navigation = useNavigation()
     const { authStore } = useStores()
@@ -136,7 +150,20 @@ function All() {
       <Stack.Screen name='search' component={SearchScreen} />
       <Stack.Screen name='tab' component={TabBar} />
       <Stack.Screen name='profile' component={ProfileScreen} />
+      <Stack.Screen name='extension' component={Extra} />
     </Stack.Navigator>
+  )
+}
+function Extra() {
+  return (
+    <Tab.Navigator
+      tabBar={(props) => <MyTab {...props} />}
+    >
+      <Tab.Screen name='homein' component={Home} />
+      <Tab.Screen name='searchin' component={Search} />
+      <Tab.Screen name='opencartin' component={Cart} />
+      <Tab.Screen name='likein' component={Like} />
+    </Tab.Navigator>
   )
 }
 function CustomTab({ state, descriptors, navigation }) {

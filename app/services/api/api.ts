@@ -99,4 +99,34 @@ export class Api {
       return { kind: "bad-data" }
     }
   }
+  async getNews(country?: string, category?: string): Promise<Types.GetNewsResult> {
+    // make the api call
+    const response: ApiResponse<any> = await this.apisauce.get(`/top-headlines?country=in&apiKey=cab817200f92426bacb4edd2373e82ef&category=${category}`)
+
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    try {
+      return { kind: "ok", list: response.data.articles, status: response.status }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+  async getJason(): Promise<Types.GetNewsResult> {
+    // make the api call
+    const response: ApiResponse<any> = await this.apisauce.get('https://jsonplaceholder.typicode.com/todos')
+
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+
+    try {
+      return { kind: "ok", list: response.data, status: response.status }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
 }
